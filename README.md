@@ -82,5 +82,3 @@ mysqldump -u root -p --no-data floricultura > database/structure.sql
 
 # Popular com dados fictícios
 mysqldump -u root -p --where="1 LIMIT 10" floricultura produtos > database/sample_data.sql
-**📄 Licença
-MIT License
