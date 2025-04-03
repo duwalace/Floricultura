@@ -1,44 +1,62 @@
 <?php
-session_start(); // Inicia a sessão
-include 'conexao.php'; // Inclui o arquivo de conexão com o banco de dados
+session_start();
+include 'conexao.php';
 
-// Verifica se o método de requisição é POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verifica se o usuário é um administrador
     if (isset($_SESSION["tipo_usuario"]) && $_SESSION["tipo_usuario"] === "admin") {
-        $nome = $_POST['nome'];
-        $descricao = $_POST['descricao'];
-        $preco = $_POST['preco'];
+        // Validação dos dados
+        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+        $preco = filter_input(INPUT_POST, 'preco', FILTER_VALIDATE_FLOAT);
 
-        // Diretório de upload
+        if (!$nome || !$descricao || !$preco) {
+            echo json_encode(["sucesso" => false, "erro" => "Dados inválidos"]);
+            exit;
+        }
+
+        // Validação da imagem
         $diretorio = "../uploads/";
-        $imagem = $diretorio . basename($_FILES["imagem"]["name"]);
+        $extensoesPermitidas = ['jpg', 'jpeg', 'png'];
+        $nomeArquivo = $_FILES["imagem"]["name"];
+        $extensao = strtolower(pathinfo($nomeArquivo, PATHINFO_EXTENSION));
 
-        // Verifica se o arquivo foi enviado corretamente
-        if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $imagem)) {
-            $imagemNome = basename($_FILES["imagem"]["name"]);
-            
-            // Prepara a query SQL para inserir o produto
-            $sql = "INSERT INTO produtos (nome, descricao, preco, imagem) VALUES (:nome, :descricao, :preco, :imagem)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':nome', $nome);
-            $stmt->bindParam(':descricao', $descricao);
-            $stmt->bindParam(':preco', $preco);
-            $stmt->bindParam(':imagem', $imagemNome);
+        if (!in_array($extensao, $extensoesPermitidas)) {
+            echo json_encode(["sucesso" => false, "erro" => "Formato de imagem inválido"]);
+            exit;
+        }
 
-            // Executa a query
-            if ($stmt->execute()) {
+        if ($_FILES["imagem"]["size"] > 2097152) { // 2MB
+            echo json_encode(["sucesso" => false, "erro" => "Imagem muito grande (Max. 2MB)"]);
+            exit;
+        }
+
+        $nomeUnico = uniqid() . '.' . $extensao;
+        $destino = $diretorio . $nomeUnico;
+
+        if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $destino)) {
+            try {
+                $sql = "INSERT INTO produtos (nome, descricao, preco, imagem) 
+                        VALUES (:nome, :descricao, :preco, :imagem)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([
+                    ':nome' => $nome,
+                    ':descricao' => $descricao,
+                    ':preco' => $preco,
+                    ':imagem' => $nomeUnico
+                ]);
+                
                 echo json_encode(["sucesso" => true, "mensagem" => "Produto adicionado com sucesso!"]);
-            } else {
-                echo json_encode(["sucesso" => false, "erro" => "Erro ao adicionar produto no banco de dados."]);
+            } catch (PDOException $e) {
+                echo json_encode(["sucesso" => false, "erro" => "Erro no banco de dados: " . $e->getMessage()]);
             }
         } else {
-            echo json_encode(["sucesso" => false, "erro" => "Erro no upload da imagem."]);
+            echo json_encode(["sucesso" => false, "erro" => "Erro no upload da imagem"]);
         }
     } else {
-        echo json_encode(["sucesso" => false, "erro" => "Acesso negado. Somente administradores podem adicionar produtos."]);
+        echo json_encode(["sucesso" => false, "erro" => "Acesso não autorizado"]);
     }
 } else {
-    echo json_encode(["sucesso" => false, "erro" => "Método de requisição inválido."]);
+    http_response_code(405);
+    echo json_encode(["sucesso" => false, "erro" => "Método não permitido"]);
 }
 ?>
