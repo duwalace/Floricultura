@@ -35,8 +35,8 @@
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger carrinho-contador">0</span>
                 </a>
                 <?php else: ?>
-                <button type="button" class="btn btn-link text-dark me-3" id="btnLogin">
-                    <i class="fas fa-user me-1"></i>Entrar
+                <button type="button" class="btn btn-link btn-login-custom me-3" id="btnLogin">
+                    <i class="fas fa-user me-1"></i><strong>Entrar</strong>
                 </button>
                 <?php endif; ?>
             </div>
@@ -99,7 +99,6 @@
     </div>
 </header>
 
-<!-- Modal de Login -->
 <div class="modal-login" id="modalLogin">
     <div class="modal-content">
         <div class="modal-header">
@@ -107,13 +106,6 @@
             <button type="button" class="close-btn" id="closeLogin">&times;</button>
         </div>
         <div class="modal-body">
-            <button class="social-login-btn">
-                <img src="<?= isset($admin) ? '../img/google-icon.png' : 'img/google-icon.png' ?>" alt="Google"> Entrar com Google
-            </button>
-            
-            <div class="modal-divider">
-                <span>OU SE PREFERIR</span>
-            </div>
             
             <form id="loginForm">
                 <div class="form-control">
@@ -138,7 +130,6 @@
     </div>
 </div>
 
-<!-- Modal de Cadastro -->
 <div class="modal-cadastro" id="modalCadastro">
     <div class="modal-content">
         <div class="modal-header">
@@ -146,13 +137,6 @@
             <button type="button" class="close-btn" id="closeCadastro">&times;</button>
         </div>
         <div class="modal-body">
-            <button class="social-login-btn">
-                <img src="<?= isset($admin) ? '../img/google-icon.png' : 'img/google-icon.png' ?>" alt="Google"> Continuar com Google
-            </button>
-            
-            <div class="modal-divider">
-                <span>OU SE PREFERIR</span>
-            </div>
             
             <form id="cadastroForm">
                 <div class="form-control">
@@ -170,16 +154,6 @@
                 <div class="form-control">
                     <input type="password" name="senha" id="cadastroSenha" placeholder="Senha" required>
                     <i class="fas fa-eye toggle-password"></i>
-                </div>
-                
-                <div class="checkbox-container">
-                    <input type="checkbox" name="receber_ofertas" id="receberOfertas">
-                    <label for="receberOfertas">Desejo receber ofertas por e-mail</label>
-                </div>
-                
-                <div class="checkbox-container">
-                    <input type="checkbox" name="receber_whatsapp" id="receberWhatsapp" checked>
-                    <label for="receberWhatsapp">Quero receber atualizações do pedido por Whatsapp</label>
                 </div>
                 
                 <button type="submit" class="btn-cadastrar">CRIAR CONTA</button>

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Verifica se o usuário está logado e é admin
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] !== 'admin') {
     header('Location: ../login.php');
     exit;
@@ -33,23 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erro = 'Preencha todos os campos obrigatórios.';
     } else {
         $produtoObj = new Produto($id, $nome, $descricao, $preco, $imagemAtual);
-        
-        // Verifica se foi enviado um novo arquivo
+
         if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
             $nomeArquivo = time() . '_' . $_FILES['imagem']['name'];
             $caminhoTemp = $_FILES['imagem']['tmp_name'];
             $caminhoDestino = '../uploads/' . $nomeArquivo;
             
-            // Verifica se é uma imagem válida
             $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif'];
             if (!in_array($_FILES['imagem']['type'], $tiposPermitidos)) {
                 $erro = 'Tipo de arquivo não permitido. Envie apenas imagens (JPG, PNG, GIF).';
             } else {
-                // Move o arquivo para a pasta de uploads
+
                 if (move_uploaded_file($caminhoTemp, $caminhoDestino)) {
                     $produtoObj->setImagem($nomeArquivo);
-                    
-                    // Remove a imagem antiga se existir
+
                     if ($imagemAtual && file_exists('../uploads/' . $imagemAtual)) {
                         unlink('../uploads/' . $imagemAtual);
                     }
@@ -62,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (empty($erro)) {
             if ($produtoObj->atualizar()) {
                 $sucesso = 'Produto atualizado com sucesso!';
-                // Atualiza os dados exibidos
+
                 $produto = Produto::buscarPorId($id);
                 $nome = $produto['nome'];
                 $descricao = $produto['descricao'];

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/global.php';
+
 class Conexao {
     private static $instancia;
     

@@ -21,7 +21,6 @@ $telefone = $_POST['telefone'] ?? '';
 $receber_ofertas = isset($_POST['receber_ofertas']) ? 1 : 0;
 $receber_whatsapp = isset($_POST['receber_whatsapp']) ? 1 : 0;
 
-// Validar os dados
 if (empty($nome) || empty($email) || empty($senha) || empty($telefone)) {
     echo json_encode(['status' => 'error', 'message' => 'Preencha todos os campos obrigatórios.']);
     exit;
@@ -33,13 +32,12 @@ if (strlen($senha) < 6) {
 }
 
 try {
-    // Verificar se o email já existe
+
     if (Usuario::emailExiste($email)) {
         echo json_encode(['status' => 'error', 'message' => 'Este email já está cadastrado.']);
         exit;
     }
 
-    // Criar e cadastrar o usuário
     $usuario = new Usuario(null, $nome, $email, $senha);
     
     if ($usuario->cadastrar()) {
@@ -48,7 +46,7 @@ try {
         echo json_encode(['status' => 'error', 'message' => 'Erro ao cadastrar. Tente novamente.']);
     }
 } catch (Exception $e) {
-    // Log do erro para depuração
+
     error_log('Erro no cadastro: ' . $e->getMessage());
     echo json_encode(['status' => 'error', 'message' => 'Erro interno do servidor. Tente novamente mais tarde.']);
 }

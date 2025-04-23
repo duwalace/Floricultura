@@ -1,8 +1,7 @@
--- Criação do banco de dados
+
 CREATE DATABASE IF NOT EXISTS floricultura;
 USE floricultura;
 
--- Tabela de usuários
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -11,7 +10,6 @@ CREATE TABLE IF NOT EXISTS usuarios (
     tipo ENUM('admin', 'usuario') NOT NULL DEFAULT 'usuario'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Tabela de produtos
 CREATE TABLE IF NOT EXISTS produtos (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -20,12 +18,9 @@ CREATE TABLE IF NOT EXISTS produtos (
     imagem VARCHAR(255) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Inserir usuário administrador padrão
--- Senha: admin123
 INSERT INTO usuarios (nome, email, senha, tipo) 
 VALUES ('Administrador', 'admin@floricultura.com', '$2y$10$8tGmGzgvGmQQLdv9X.Gg2.XGS1Zk9GQbO0YQEHlVyXxSQ1IbQJnHa', 'admin');
 
--- Inserir alguns produtos de exemplo
 INSERT INTO produtos (nome, descricao, preco, imagem) VALUES 
 ('Buquê de Rosas Vermelhas', 'Lindo buquê com 12 rosas vermelhas, símbolo de amor e paixão. Perfeito para presentear em ocasiões especiais.', 89.90, NULL),
 ('Orquídea Phalaenopsis', 'Elegante orquídea phalaenopsis em vaso decorativo. Planta de fácil manutenção e longa duração.', 129.90, NULL),

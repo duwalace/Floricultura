@@ -1,5 +1,6 @@
 <?php
-require_once 'config/conexao.php';
+require_once __DIR__ . '/../config/global.php'; // Inclui o arquivo global
+require_once BASE_PATH . '/config/conexao.php'; // Inclui o arquivo de conexão
 
 class Produto {
     private $id;

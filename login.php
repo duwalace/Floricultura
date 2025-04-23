@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Se já estiver logado, redireciona para a página inicial
 if (isset($_SESSION['usuario'])) {
     header('Location: index.php');
     exit;
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email) || empty($senha)) {
         $erro = 'Preencha todos os campos.';
     } else {
-        // Verificação especial para o admin
+
         if ($email === 'admin@floricultura.com' && $senha === 'admin123') {
             $_SESSION['usuario'] = [
                 'id' => 1,
@@ -31,8 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: index.php');
             exit;
         }
-        
-        // Verificação normal para outros usuários
+
         $usuario = new Usuario();
         
         if ($usuario->autenticar($email, $senha)) {

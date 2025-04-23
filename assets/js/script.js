@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  // Mostrar/ocultar senha
+
   $(".mostrar-senha").click(function () {
     const input = $(this).closest(".input-group").find("input")
     const icon = $(this).find("i")
@@ -13,7 +13,6 @@ $(document).ready(() => {
     }
   })
 
-  // Atualizar contador do carrinho
   function atualizarContadorCarrinho() {
     $.ajax({
       url: "ajax/contar-itens-carrinho.php",
@@ -25,7 +24,6 @@ $(document).ready(() => {
     })
   }
 
-  // Adicionar produto ao carrinho
   $(".adicionar-carrinho").click(function () {
     const produtoId = $(this).data("id")
 
@@ -45,7 +43,6 @@ $(document).ready(() => {
     })
   })
 
-  // Adicionar produto ao carrinho com quantidade específica
   $(".adicionar-carrinho-qtd").click(function () {
     const produtoId = $(this).data("id")
     const quantidade = Number.parseInt($(".quantidade-produto").val())
@@ -66,7 +63,6 @@ $(document).ready(() => {
     })
   })
 
-  // Aumentar/diminuir quantidade no detalhe do produto
   $(".aumentar-quantidade").click(() => {
     const input = $(".quantidade-produto")
     const valor = Number.parseInt(input.val())
@@ -81,7 +77,6 @@ $(document).ready(() => {
     }
   })
 
-  // Atualizar quantidade no carrinho
   $(".atualizar-quantidade").click(function () {
     const produtoId = $(this).data("id")
     const acao = $(this).data("acao")
@@ -111,7 +106,6 @@ $(document).ready(() => {
     })
   })
 
-  // Atualizar quantidade ao mudar o valor do input
   $(".quantidade-carrinho").change(function () {
     const produtoId = $(this).data("id")
     const quantidade = Number.parseInt($(this).val())
@@ -136,7 +130,6 @@ $(document).ready(() => {
     })
   })
 
-  // Remover item do carrinho
   $(".remover-item").click(function () {
     if (confirm("Tem certeza que deseja remover este item do carrinho?")) {
       const produtoId = $(this).data("id")
@@ -157,7 +150,6 @@ $(document).ready(() => {
     }
   })
 
-  // Limpar carrinho
   $(".limpar-carrinho").click(() => {
     if (confirm("Tem certeza que deseja limpar o carrinho?")) {
       $.ajax({
@@ -175,7 +167,5 @@ $(document).ready(() => {
     }
   })
 
-  // Inicializa o contador do carrinho
   atualizarContadorCarrinho()
 })
-

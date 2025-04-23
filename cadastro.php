@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Se já estiver logado, redireciona para a página inicial
 if (isset($_SESSION['usuario'])) {
     header('Location: index.php');
     exit;

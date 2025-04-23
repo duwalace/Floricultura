@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Verifica se o usuário está logado e é admin
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] !== 'admin') {
     header('Location: ../login.php');
     exit;
@@ -43,15 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($usuarioObj->atualizar()) {
             $sucesso = 'Usuário atualizado com sucesso!';
-            
-            // Se o usuário editou o próprio perfil, atualiza a sessão
+
             if ($id == $_SESSION['usuario']['id']) {
                 $_SESSION['usuario']['nome'] = $nome;
                 $_SESSION['usuario']['email'] = $email;
                 $_SESSION['usuario']['tipo'] = $tipo;
             }
-            
-            // Atualiza os dados exibidos
+
             $usuario = Usuario::buscarPorId($id);
             $nome = $usuario['nome'];
             $email = $usuario['email'];

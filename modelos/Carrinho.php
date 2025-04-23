@@ -43,7 +43,6 @@ class Carrinho {
             return false;
         }
         
-        // Verifica se o produto já está no carrinho
         if (isset($this->itens[$produtoId])) {
             $this->itens[$produtoId]->setQuantidade(
                 $this->itens[$produtoId]->getQuantidade() + $quantidade

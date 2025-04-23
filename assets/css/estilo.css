@@ -1,4 +1,4 @@
-/* Estilos Gerais */
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
@@ -10,12 +10,10 @@ main {
   flex: 1;
 }
 
-/* Navbar */
 .navbar-brand {
   font-weight: 600;
 }
 
-/* Carrossel */
 .carousel-item img {
   height: 400px;
   object-fit: cover;
@@ -27,7 +25,6 @@ main {
   padding: 15px;
 }
 
-/* Cards de Produtos */
 .produto-card {
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -47,17 +44,14 @@ main {
   overflow: hidden;
 }
 
-/* Formulários */
 .mostrar-senha {
   cursor: pointer;
 }
 
-/* Footer */
 footer {
   margin-top: auto;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .carousel-item img {
     height: 300px;
@@ -69,4 +63,3 @@ footer {
     height: 200px;
   }
 }
-

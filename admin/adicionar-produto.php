@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Verifica se o usuário está logado e é admin
 if (!isset($_SESSION['usuario']) || $_SESSION['usuario']['tipo'] !== 'admin') {
     header('Location: ../login.php');
     exit;
@@ -25,18 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $produto = new Produto(null, $nome, $descricao, $preco);
         
-        // Verifica se foi enviado um arquivo
         if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
             $nomeArquivo = time() . '_' . $_FILES['imagem']['name'];
             $caminhoTemp = $_FILES['imagem']['tmp_name'];
             $caminhoDestino = '../uploads/' . $nomeArquivo;
-            
-            // Verifica se é uma imagem válida
+
             $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif'];
             if (!in_array($_FILES['imagem']['type'], $tiposPermitidos)) {
                 $erro = 'Tipo de arquivo não permitido. Envie apenas imagens (JPG, PNG, GIF).';
             } else {
-                // Move o arquivo para a pasta de uploads
+
                 if (move_uploaded_file($caminhoTemp, $caminhoDestino)) {
                     $produto->setImagem($nomeArquivo);
                 } else {
@@ -73,9 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <div class="container-fluid">
         <div class="row">
-            <?php include 'componentes/menu-lateral.php'; ?>
+            <div class="col-md-3 col-sm-12">
+                <?php include 'componentes/menu-lateral.php'; ?>
+            </div>
             
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <main class="col-md-9 col-sm-12 ms-sm-auto col-lg-10 px-md-4 py-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Adicionar Produto</h1>
                 </div>
@@ -96,11 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="card-body">
                         <form action="" method="post" enctype="multipart/form-data">
                             <div class="row mb-3">
-                                <div class="col-md-6">
+                                <div class="col-md-6 col-sm-12">
                                     <label for="nome" class="form-label">Nome do Produto *</label>
                                     <input type="text" class="form-control" id="nome" name="nome" value="<?= htmlspecialchars($nome) ?>" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 col-sm-12">
                                     <label for="preco" class="form-label">Preço *</label>
                                     <div class="input-group">
                                         <span class="input-group-text">R$</span>

@@ -16,7 +16,6 @@ class Usuario {
       $this->tipo = $tipo;
   }
   
-  // Getters e Setters
   public function getId() { return $this->id; }
   public function getNome() { return $this->nome; }
   public function getEmail() { return $this->email; }
@@ -29,7 +28,6 @@ class Usuario {
   public function setSenha($senha) { $this->senha = $senha; }
   public function setTipo($tipo) { $this->tipo = $tipo; }
   
-  // Métodos CRUD
   public function cadastrar() {
       try {
           $conn = Conexao::obterConexao();
@@ -50,7 +48,7 @@ class Usuario {
   }
   
   public function autenticar($email, $senha) {
-      // Verificação especial para o admin
+
       if ($email === 'admin@floricultura.com' && $senha === 'admin123') {
           $this->id = 1;
           $this->nome = 'Administrador';
@@ -116,8 +114,7 @@ class Usuario {
       try {
           $conn = Conexao::obterConexao();
           
-          // Se a senha foi alterada, faz o hash
-          if (strlen($this->senha) < 60) { // Verifica se não é um hash
+          if (strlen($this->senha) < 60) { 
               $senhaHash = password_hash($this->senha, PASSWORD_DEFAULT);
               $stmt = $conn->prepare("UPDATE usuarios SET nome = :nome, email = :email, senha = :senha, tipo = :tipo WHERE id = :id");
               $stmt->bindParam(':senha', $senhaHash);

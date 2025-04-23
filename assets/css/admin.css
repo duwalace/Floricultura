@@ -88,3 +88,27 @@ main {
   margin-top: 56px;
 }
 
+/* Ajusta o menu lateral para telas menores */
+@media (max-width: 768px) {
+  .menu-lateral {
+    display: none;
+  }
+
+  .menu-lateral.active {
+    display: block;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-label {
+    font-size: 14px;
+  }
+
+  .form-control {
+    font-size: 14px;
+  }
+}
+
+button.btn.btn-primary.d-md-none#toggle-menu {
+  display: block;
+}

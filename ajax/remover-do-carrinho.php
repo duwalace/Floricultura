@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Verifica se o usuário está logado
 if (!isset($_SESSION['usuario'])) {
     echo json_encode(['status' => 'error', 'message' => 'Usuário não autenticado']);
     exit;

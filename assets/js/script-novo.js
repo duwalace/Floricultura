@@ -1,11 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Verificar se jQuery está carregado
+
     if (typeof jQuery === "undefined") {
       console.error("jQuery não está carregado! O script não funcionará corretamente.")
       return
     }
   
-    // Mostrar/ocultar senha
     $(".toggle-password").click(function () {
       const input = $(this).closest(".form-control").find("input")
   
@@ -17,38 +16,32 @@ document.addEventListener("DOMContentLoaded", () => {
         $(this).removeClass("fa-eye-slash").addClass("fa-eye")
       }
     })
-  
-    // Abrir modal de login
+
     $("#btnLogin, #btnLoginComprar").click((e) => {
       e.preventDefault()
       $("#modalLogin").addClass("active")
     })
   
-    // Fechar modal de login
     $("#closeLogin").click(() => {
       $("#modalLogin").removeClass("active")
     })
   
-    // Abrir modal de cadastro
     $("#btnShowCadastro").click((e) => {
       e.preventDefault()
       $("#modalLogin").removeClass("active")
       $("#modalCadastro").addClass("active")
     })
-  
-    // Fechar modal de cadastro
+
     $("#closeCadastro").click(() => {
       $("#modalCadastro").removeClass("active")
     })
-  
-    // Voltar para o login
+
     $("#btnShowLogin").click((e) => {
       e.preventDefault()
       $("#modalCadastro").removeClass("active")
       $("#modalLogin").addClass("active")
     })
-  
-    // Fechar modais ao clicar fora
+
     $(window).click((e) => {
       if ($(e.target).hasClass("modal-login")) {
         $("#modalLogin").removeClass("active")
@@ -57,13 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
         $("#modalCadastro").removeClass("active")
       }
     })
-  
-    // Processar formulário de login via AJAX
+
     $("#loginForm").on("submit", function (e) {
       e.preventDefault()
       console.log("Formulário de login enviado")
   
-      // Obter o caminho base do site
       const baseUrl = window.location.pathname.includes("/admin/") ? "../" : ""
   
       $.ajax({
@@ -86,13 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       })
     })
-  
-    // Processar formulário de cadastro via AJAX
+
     $("#cadastroForm").on("submit", function (e) {
       e.preventDefault()
       console.log("Formulário de cadastro enviado")
-  
-      // Obter o caminho base do site
+
       const baseUrl = window.location.pathname.includes("/admin/") ? "../" : ""
   
       $.ajax({
@@ -118,9 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
   
-    // Atualizar contador do carrinho
     function atualizarContadorCarrinho() {
-      // Obter o caminho base do site
+
       const baseUrl = window.location.pathname.includes("/admin/") ? "../" : ""
   
       $.ajax({
@@ -135,8 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       })
     }
-  
-    // Adicionar produto ao carrinho
+
     $(".adicionar-carrinho").click(function () {
       const produtoId = $(this).data("id")
       const baseUrl = window.location.pathname.includes("/admin/") ? "../" : ""
@@ -160,8 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       })
     })
-  
-    // Adicionar produto ao carrinho com quantidade específica
+
     $(".adicionar-carrinho-qtd").click(function () {
       const produtoId = $(this).data("id")
       const quantidade = Number.parseInt($(".quantidade-produto").val())
@@ -186,8 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       })
     })
-  
-    // Aumentar/diminuir quantidade no detalhe do produto
+
     $(".aumentar-quantidade").click(() => {
       const input = $(".quantidade-produto")
       const valor = Number.parseInt(input.val())
@@ -201,8 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
         input.val(valor - 1)
       }
     })
-  
-    // Atualizar quantidade no carrinho
+
     $(".atualizar-quantidade").click(function () {
       const produtoId = $(this).data("id")
       const acao = $(this).data("acao")
@@ -237,7 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
   
-    // Atualizar quantidade ao mudar o valor do input
     $(".quantidade-carrinho").change(function () {
       const produtoId = $(this).data("id")
       const quantidade = Number.parseInt($(this).val())
@@ -267,7 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
   
-    // Remover item do carrinho
     $(".remover-item").click(function () {
       if (confirm("Tem certeza que deseja remover este item do carrinho?")) {
         const produtoId = $(this).data("id")
@@ -293,7 +275,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   
-    // Limpar carrinho
     $(".limpar-carrinho").click(() => {
       if (confirm("Tem certeza que deseja limpar o carrinho?")) {
         const baseUrl = window.location.pathname.includes("/admin/") ? "../" : ""
@@ -317,7 +298,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   
-    // Inicializa o contador do carrinho
     try {
       if ($(".carrinho-contador").length > 0) {
         atualizarContadorCarrinho()

@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once 'modelos/Produto.php';
+require_once __DIR__ . '/config/global.php';
+require_once BASE_PATH . '/modelos/Produto.php';
 
-// Buscar produtos em destaque para o carrossel
 $produtosDestaque = Produto::listarTodos();
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,6 @@ $produtosDestaque = Produto::listarTodos();
     <?php include 'componentes/barra-navegacao.php'; ?>
     
     <main>
-        <!-- Carrossel -->
         <div class="carousel-container">
             <div id="carrossel-principal" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -50,8 +49,7 @@ $produtosDestaque = Produto::listarTodos();
                 </button>
             </div>
         </div>
-        
-        <!-- Seção de Serviços -->
+
         <div class="servicos-section">
             <div class="container">
                 <div class="row">
@@ -84,7 +82,7 @@ $produtosDestaque = Produto::listarTodos();
         </div>
         
         <div class="container my-4">
-            <!-- Categorias -->
+
             <section class="mb-5">
                 <h2 class="secao-titulo mb-4">ESCOLHA O SEU PRESENTE</h2>
                 
@@ -127,8 +125,7 @@ $produtosDestaque = Produto::listarTodos();
                     </div>
                 </div>
             </section>
-            
-            <!-- Produtos em Destaque -->
+
             <section class="mb-5">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="secao-titulo mb-0">FLORES COM DESCONTO DE ATÉ 50%</h2>
@@ -167,8 +164,7 @@ $produtosDestaque = Produto::listarTodos();
                     <?php endforeach; ?>
                 </div>
             </section>
-            
-            <!-- Banner Promocional -->
+
             <section class="mb-5">
                 <div class="row">
                     <div class="col-md-8">
@@ -186,7 +182,6 @@ $produtosDestaque = Produto::listarTodos();
                 </div>
             </section>
             
-            <!-- Presentes de Aniversário -->
             <section class="mb-5">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="secao-titulo mb-0">PRESENTES DE ANIVERSÁRIO</h2>
