@@ -1,84 +1,120 @@
-README Profissional para o Repositório da Floricultura
-Aqui está um modelo completo de README.md para seu projeto, seguido pelos comandos para criá-lo e subi-lo ao GitHub.
+# 🌸 VivaFlor - E-commerce para Floricultura
 
-🌿 Viva-Flor - E-commerce de Flores (PHP/MySQL)
-Logo da Viva-Flor
-Um e-commerce completo para floricultura com painel administrativo
+![Banner do Projeto](./img/logo.png)
 
-📌 Visão Geral
-Sistema de loja virtual para floricultura desenvolvido em PHP e MySQL, com:
+Sistema completo de e-commerce para floricultura com painel administrativo, desenvolvido em PHP/MySQL.
 
-🛒 Carrinho de compras
+## ✨ Funcionalidades Principais
+- 🛒 **Carrinho de Compras** com cálculo de frete
+- 👤 **Autenticação** de usuários (cliente/admin)
+- 📊 **Painel Administrativo** para gestão de produtos/pedidos
+- 🌷 **Catálogo Organizado** por categorias (buquês, plantas, presentes)
+- 📱 **Design Responsivo** para mobile e desktop
 
-👤 Autenticação de usuários
+## 🛠 Stack Tecnológica
+| Front-end       | Back-end       | Banco de Dados | Infraestrutura  |
+|-----------------|----------------|----------------|-----------------|
+| HTML5           | PHP 8+         | MySQL 8.0      | XAMPP/Apache    |
+| CSS3 (Flex/Grid)| POO/MVC        | Procedures     | Composer        |
+| JavaScript ES6  | JWT Auth       | Triggers       | Git             |
 
-🏪 Painel administrativo
+## 🚀 Instalação
 
-🌸 Catálogo de produtos organizado por categorias
+### Pré-requisitos
+- PHP 8.0+
+- MySQL 5.7+
+- Apache/Nginx
+- Composer (opcional)
 
-🚀 Tecnologias
-Front-end: HTML5, CSS3, JavaScript
-
-Back-end: PHP 8+
-
-Banco de dados: MySQL/MariaDB
-
-Servidor: XAMPP/Apache
-
-📦 Estrutura do Projeto
-Copy
-floricultura/
-├── assets/
-│   ├── css/          # Estilos CSS
-│   ├── js/           # Scripts JavaScript
-│   └── img/          # Imagens do sistema
-├── database/
-│   ├── structure.sql # Estrutura do banco
-│   └── sample_data.sql # Dados fictícios
-├── includes/         # Conexão DB e funções
-├── php/              # Lógica backend
-└── README.md         # Este arquivo
-⚙️ Configuração
-Requisitos:
-
-PHP 8.0+
-
-MySQL 5.7+
-
-Apache/Nginx
-
-Instalação:
-
-bash
-Copy
+```bash
+# Clonar repositório
 git clone https://github.com/seu-usuario/floricultura.git
 cd floricultura
-Banco de Dados:
 
-bash
-Copy
+# Configurar banco de dados
 mysql -u root -p < database/structure.sql
 mysql -u root -p < database/sample_data.sql
-Configuração:
 
-Renomeie includes/config.example.php para includes/config.php
+# Configurar ambiente
+cp includes/config.example.php includes/config.php
+📦 Estrutura de Arquivos
+floricultura/
+├── .vscode/
+│ │ └── settings.json
+│ ├── admin/
+│ │ ├── components/
+│ │ ├── barra-navegacao.php
+│ │ ├── menu-lateral.php
+│ │ ├── adicionar-produto.php
+│ │ ├── adicionar-usuario.php
+│ │ ├── editar-produto.php
+│ │ ├── editar-usuario.php
+│ │ ├── excluir-produto.php
+│ │ ├── excluir-usuario.php
+│ │ ├── index.php
+│ │ ├── produtos.php
+│ │ └── usuarios.php
+│ ├── ajax/
+│ │ ├── adicionar-ao-carrinho.php
+│ │ ├── atualizar-carrinho.php
+│ │ ├── contar-itens-carrinho.php
+│ │ ├── limpar-carrinho.php
+│ │ ├── processar-cadastro.php
+│ │ ├── processar-login.php
+│ │ └── remover-do-carrinho.php
+│ ├── assets/
+│ │ ├── css/
+│ │ │ ├── admin.css
+│ │ │ ├── estilo-novo.css
+│ │ │ └── estilo.css
+│ │ └── js/
+│ │ ├── admin.js
+│ │ ├── script-novo.js
+│ │ └── script.js
+│ ├── components/
+│ │ ├── barra-navegacao.php
+│ │ └── rodape.php
+│ ├── config/
+│ │ ├── conexao.php
+│ │ └── global.php
+│ ├── img/
+│ ├── models/
+│ │ ├── Carrinho.php
+│ │ ├── Produto.php
+│ │ └── Usuario.php
+│ └── public/
+│ ├── .htaccess
+│ ├── cadastro.php
+│ ├── carrinho.php
+│ ├── detalhes-produto.php
+│ ├── floricultura.sql
+│ ├── index.php
+│ ├── login.php
+│ ├── logout.php
+│ └── produtos.php
+└── README.md
+🔐 Acesso de Teste
+Tipo	Email	Senha
+Admin	admin@vivaflor.com	Admin@123
+Cliente	cliente@teste.com	Cliente123
+📌 Roadmap
+MVP inicial
 
-Edite com suas credenciais do banco
+Integração com PagSeguro
 
-🌱 Dados de Teste
-Acesso Admin:
-📧 Email: admin@exemplo.com
-🔑 Senha: Admin@123
+Sistema de cupons
 
-Usuário Comum:
-📧 Email: cliente@exemplo.com
-🔑 Senha: Cliente@123
+Relatórios avançados
 
-🛠️ Comandos Úteis
-bash
-Copy
-# Exportar estrutura do banco (dev)
-mysqldump -u root -p --no-data floricultura > database/structure.sql
+🤝 Contribuição
+Faça um fork do projeto
 
-# Popular com dados fictícios
-mysqldump -u root -p --where="1 LIMIT 10" floricultura produtos > database/sample_data.sql
+Crie uma branch (git checkout -b feature/nova-funcionalidade)
+
+Commit suas mudanças (git commit -m "Adiciona XYZ")
+
+Push para a branch (git push origin feature/nova-funcionalidade)
+
+Abra um Pull Request
+
+---
