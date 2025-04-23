@@ -26,7 +26,7 @@ Sistema completo de e-commerce para floricultura com painel administrativo, dese
 
 ```bash
 # Clonar repositório
-git clone https://github.com/seu-usuario/floricultura.git
+git clone https://github.com/duwalace/floricultura.git
 cd floricultura
 
 # Configurar banco de dados
