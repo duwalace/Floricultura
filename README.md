@@ -1,7 +1,5 @@
 # 🌸 VivaFlor - E-commerce para Floricultura
 
-<img src="./img/logo.png" alt="Logo VivaFlor" width="100px" >
-
 Sistema completo de e-commerce para floricultura com painel administrativo, desenvolvido em PHP/MySQL.
 
 ## ✨ Funcionalidades Principais
